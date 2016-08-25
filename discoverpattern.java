@@ -17,8 +17,13 @@ public class discoverpattern {
 //		String longestcommonPattern = discoverPattern("https://www.quantcast.com/top-sites", "Google.com,Youtube.com,Facebook.com,Yahoo.com");
 //		String longestcommonPattern = discoverPattern("https://www.similarweb.com/global", "Google.com,Youtube.com,Facebook.com,Yahoo.com");
 //		System.out.println(longestcommonPattern);
-		
-		System.out.println(scrapeBasedOnPattern("http://www.alexa.com/topsites/global;", longestcommonPattern, 7));
+
+		/* This is a drive function to find links from a site called alexa.com based on the longest common 
+		 * pattern discovered above */
+		if(!longestcommonPattern.equals("ERROR!"))
+			System.out.println(scrapeBasedOnPattern("http://www.alexa.com/topsites/global;", longestcommonPattern, 7));
+		else
+			System.out.println("This API needs at least two comma separated strings to find a pattern...");
 	}
 		
 	/* Returns all common substring between two strings sorted in descending order of length of the common 
@@ -57,6 +62,9 @@ public class discoverpattern {
 		String[] keywords  = keywordsstring.toLowerCase().split(",");
 		ArrayList<Set<String>> sets = new ArrayList<Set<String>>(); 
 		
+		if(keywords.length < 2)
+			return "ERROR!";
+		
 		for(int i = 0;i<keywords.length;i++)
 			sets.add(getallLines(url, keywords[i]));
 		
@@ -72,9 +80,12 @@ public class discoverpattern {
 	            return o2.length()-o1.length();
 	        }
 	    });
-	    
+	    	    
 	    /* find longestcommonPattern contained in sets[2:keywords-1] */
-	    String longestcommonPattern = "";
+	    String longestcommonPattern = candidatePatternsarray[0];
+	    if(keywords.length == 2)
+	    	return longestcommonPattern;
+	    
 	    for(int i = 0;i<candidatePatternsarray.length;i++)
 	    {
 	    	longestcommonPattern = candidatePatternsarray[i];
