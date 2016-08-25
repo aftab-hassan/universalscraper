@@ -7,7 +7,7 @@
 <body>
 <div class="container">
     <div class="jumbotron">
-        <h1 align="center" style="font-family:Comic Sans MS">Alexia++</h1>
+        <h1 align="center" style="font-family:Comic Sans MS">Alexa++</h1>
         <p align="center" style="font-family:Comic Sans MS">Cuz we don't need no API :/</p>
     </div>
 
